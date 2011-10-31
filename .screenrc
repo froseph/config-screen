@@ -1,0 +1,41 @@
+# no annoying audible bell, please
+vbell on
+vbell_msg ''
+# detach on hangup
+autodetach on
+
+# don't display the copyright page
+startup_message off
+hardstatus alwayslastline
+#hardstatus string '%{= mK}%-Lw%{= KW}%50>%n%f* %t%{= mK}%+Lw%< %{= kG}%-=%D %d %M %Y %c:%s%{-}'
+hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f %t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %m/%d %{W}%c %{g}]'
+termcapinfo xterm-color ti@:te@         # fix the scroll bar
+escape ^tt
+
+# emulate .logout message
+pow_detach_msg "Screen session of \$LOGNAME \$:cr:\$:nl:ended."
+
+#remove some stupid / dangerous key bindings
+bind k
+bind ^k
+bind .
+bind ^\
+bind \\
+bind ^h
+bind h
+
+# make the shell in every window a login shell
+shell -$SHELL
+
+#default isn't the same as the original terminal
+defscrollback 100000
+
+# terminfo and termcap for nice 256 color terminal
+# allow bold colors - necessary for some reason
+attrcolor b ".I" 
+# tell screen how to set colors. AB = background, AF=foreground 
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm' 
+# erase background with current bg color 
+defbce "on" 
+
+defutf8 on
